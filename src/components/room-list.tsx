@@ -1,3 +1,7 @@
+import { ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { useRooms } from '@/http/use-rooms'
+import { Badge } from './ui/badge'
 import {
   Card,
   CardContent,
@@ -5,10 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from './ui/card'
-import { ArrowRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { Badge } from '@/components/ui/badge'
-import { useRooms } from '@/http/use-rooms'
 
 export function RoomList() {
   const { data, isLoading } = useRooms()
@@ -29,22 +29,24 @@ export function RoomList() {
         {data?.map((room) => {
           return (
             <Link
+              className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent/50"
               key={room.id}
-              className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent"
               to={`/room/${room.id}`}
             >
-              <div className="flex-1 flex-col gap-1">
+              <div className="flex flex-1 flex-col gap-1">
                 <h3 className="font-medium">{room.name}</h3>
 
                 <div className="flex items-center gap-2">
-                  <Badge variant="secondary text-xs" className="mt-1">
-                    {room.questionsCount} perguntas
+                  
+                  <Badge className="text-xs" variant="secondary">
+                    {room.questionsCount} pergunta(s)
                   </Badge>
                 </div>
               </div>
 
               <span className="flex items-center gap-1 text-sm">
-                Entrar <ArrowRight className="size-3" />
+                Entrar
+                <ArrowRight className="size-3" />
               </span>
             </Link>
           )
